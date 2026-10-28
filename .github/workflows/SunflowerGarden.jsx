@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'convex/react'
-import { api } from '../convex/_generated/api'
+import { api } from './convex/_generated/api'
 import { getGrowthStage } from './gardenGrowth'
 
 const STAGES = {
@@ -115,8 +115,9 @@ function ConnectedGarden() {
         ) : (
           <div className="community-garden-grid" aria-label="Спільний сад соняшників">
             {flowers.map((flower, index) => {
-              const stage = STAGES[getGrowthStage(flower.plantedAt, now)]
-              return <div className={`community-flower community-flower-${flower.stage}`} key={`${flower.plantedAt}-${index}`} title={stage.name} aria-label={stage.name}><span aria-hidden="true">{stage.icon}</span></div>
+              const stageKey = getGrowthStage(flower.plantedAt, now)
+              const stage = STAGES[stageKey]
+              return <div className={`community-flower community-flower-${stageKey}`} key={`${flower.plantedAt}-${index}`} title={stage.name} aria-label={stage.name}><span aria-hidden="true">{stage.icon}</span></div>
             })}
           </div>
         )}
