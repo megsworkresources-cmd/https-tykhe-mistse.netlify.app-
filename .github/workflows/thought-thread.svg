@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="t d">
+  <title id="t">Думка, що розплутується</title>
+  <desc id="d">Фіолетова нитка вибирається з крихітної банки та перетворюється на вільну лінію серед зірок.</desc>
+  <rect width="640" height="480" rx="34" fill="#eee5f7"/>
+  <path d="M0 390 Q180 360 330 400 T640 380 V480 H0Z" fill="#d7c8e8"/>
+  <rect x="130" y="250" width="160" height="145" rx="24" fill="#f7edda" fill-opacity=".8" stroke="#29283c" stroke-width="8"/>
+  <path d="M165 250 v-23 h90 v23" fill="#f8d45d" stroke="#29283c" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M160 335 C120 290 235 276 253 321 C275 370 154 378 171 328 C183 292 251 305 243 347" fill="none" stroke="#7b61b5" stroke-width="8" stroke-linecap="round"/>
+  <path d="M212 250 C220 208 280 223 290 185 C305 135 360 190 390 150 C421 110 450 151 472 122 C503 82 536 130 550 91" fill="none" stroke="#294fbd" stroke-width="8" stroke-linecap="round"/>
+  <path d="M389 150 q-29 -30 -4 -48 q30 10 13 35 q36 -17 42 10 q-15 24 -42 11" fill="#f8d45d" stroke="#29283c" stroke-width="5"/>
+  <path d="M435 258 l8 19 21 2 -16 13 5 20 -18 -11 -18 11 5 -20 -16 -13 21 -2Z" fill="#e6ad7d" stroke="#29283c" stroke-width="5"/>
+  <circle cx="112" cy="125" r="18" fill="#f8d45d" stroke="#29283c" stroke-width="5"/>
+  <path d="M480 342 q18 -32 36 0 q-18 32 -36 0Z" fill="#a6c69a" stroke="#29283c" stroke-width="5"/>
+  <g fill="#29283c">
+    <circle cx="335" cy="85" r="4"/>
+    <circle cx="350" cy="76" r="4"/>
+    <circle cx="365" cy="88" r="4"/>
+  </g>
+</svg>

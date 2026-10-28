@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="t d">
+  <title id="t">Будиночок, який ти носиш із собою</title>
+  <desc id="d">Маленький паперовий будинок стоїть у прозорій дивній теплиці з фіолетовими рослинами.</desc>
+  <rect width="640" height="480" rx="34" fill="#dce5f4"/>
+  <path d="M100 380 Q220 345 320 385 T560 374" fill="none" stroke="#294fbd" stroke-width="6" stroke-linecap="round"/>
+  <path d="M178 348 L178 195 L316 112 L452 196 L452 348Z" fill="#f8d45d" stroke="#29283c" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M151 203 L316 92 L480 203" fill="none" stroke="#7b61b5" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="285" y="250" width="68" height="98" rx="34" fill="#e6ad7d" stroke="#29283c" stroke-width="7"/>
+  <rect x="213" y="225" width="39" height="43" rx="18" fill="#f8edda" stroke="#29283c" stroke-width="6"/>
+  <rect x="377" y="225" width="39" height="43" rx="18" fill="#f8edda" stroke="#29283c" stroke-width="6"/>
+  <path d="M120 360 Q70 250 128 145 Q220 55 320 67 Q438 51 512 152 Q575 265 520 360" fill="none" stroke="#294fbd" stroke-width="7" stroke-dasharray="7 13" stroke-linecap="round"/>
+  <path d="M108 332 Q68 303 88 268 Q126 267 134 310 M506 333 Q552 299 532 266 Q496 274 488 311" fill="#a7c69c" stroke="#29283c" stroke-width="6"/>
+  <circle cx="110" cy="107" r="20" fill="#f8d45d" stroke="#29283c" stroke-width="5"/>
+  <path d="M480 95 l8 18 20 2 -15 12 4 20 -17 -10 -17 10 4 -20 -15 -12 20 -2Z" fill="#e6ad7d" stroke="#29283c" stroke-width="4"/>
+</svg>
