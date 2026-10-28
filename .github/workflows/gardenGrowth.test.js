@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { getGrowthStage } from '../src/gardenGrowth.js'
+import { getGrowthStage } from './gardenGrowth.js'
 
 test('sunflower growth stages follow elapsed time', () => {
   const plantedAt = 1_000_000
