@@ -1,0 +1,40 @@
+/* Mobile and touch-input reliability fixes for iPhone/iPad Safari. */
+#drawing-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1000 / 420;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: crosshair;
+}
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid #b88943;
+  outline-offset: 3px;
+}
+img, video, canvas, svg {
+  max-width: 100%;
+}
+@media (max-width: 800px) {
+  .nav button, .head-actions button, .tool-tabs button, .feeling-strip button {
+    touch-action: manipulation;
+  }
+  .nav button, .tool-tab, .feeling-word, .btn, .help-pill {
+    min-height: 44px;
+  }
+  .wrap {
+    width: min(100% - 32px, 1120px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
