@@ -367,71 +367,36 @@ function App() {
               <p>Обери малюнок і трохи відпочинь. Натисни на іншу картку, щоб побачити інший світ.</p>
             </div>
             <div className={watchFocus ? 'watch-experience focus-mode' : 'watch-experience'}>
-              <div className="watch-player-wrap real-video-wrap">
-                <video
-                  className="real-nature-video"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster="/artwork/house-you-carry.svg"
-                  aria-label="Коротке відео квітки в природі"
-                >
-                  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
-                  На жаль, цей браузер не підтримує відтворення відео. Спробуй відкрити сторінку в іншому браузері.
-                </video>
-                <div className="watch-player-caption">
-                  <span>🌼 ПРИРОДА · КОРОТКА ПАУЗА</span>
-                  <strong>Подивись, як розкривається квітка</strong>
-                  <p>Можна натиснути відтворення, зупинити відео або просто подивитися на екран. Дихай як зазвичай.</p>
+              <div className={`illustrated-world world-${watchClips[activeWatch]?.scene || 'clouds'}`} aria-label={watchClips[activeWatch]?.title || 'Тихий ілюстрований світ'}>
+                <div className="world-art" aria-hidden="true">
+                  <span className="world-sun">☼</span>
+                  <span className="world-cloud">☁</span>
+                  <span className="world-water">〰 〰 〰 〰 〰</span>
+                  <span className="world-flower">✿</span>
+                  <span className="world-moon">☾</span>
+                  <span className="world-stars">✦ · ✧ · ✦</span>
+                  <span className="world-hill world-hill-one" />
+                  <span className="world-hill world-hill-two" />
+                  <span className="body-visual">{watchClips[activeWatch]?.symbol || '☁️'}</span>
                 </div>
-                <button type="button" className="watch-focus-toggle" aria-pressed={watchFocus} onClick={() => setWatchFocus(v => !v)}>{watchFocus ? 'Повернути меню' : 'Збільшити відео'} <span aria-hidden="true">{watchFocus ? '↙' : '↗'}</span></button>
+                <div className="watch-player-caption">
+                  <span>{watchClips[activeWatch]?.symbol} {watchClips[activeWatch]?.category}</span>
+                  <strong>{watchClips[activeWatch]?.title}</strong>
+                  <p>{watchClips[activeWatch]?.description}</p>
+                </div>
+                <button type="button" className="watch-focus-toggle" aria-pressed={watchFocus} onClick={() => setWatchFocus(v => !v)}>{watchFocus ? 'Повернути меню' : 'Збільшити світ'} <span aria-hidden="true">{watchFocus ? '↙' : '↗'}</span></button>
+              </div>
+              <div className="watch-world-options" role="group" aria-label="Обрати ілюстрований світ">
+                {watchClips.map((clip, index) => (
+                  <button type="button" key={clip.scene} className={activeWatch === index ? 'watch-world-option selected' : 'watch-world-option'} aria-pressed={activeWatch === index} onClick={() => setActiveWatch(index)}>
+                    <span aria-hidden="true">{clip.symbol}</span>
+                    <strong>{clip.title}</strong>
+                    <small>{clip.category}</small>
+                  </button>
+                ))}
               </div>
             </div>
-            <div className="watch-reminder"><span aria-hidden="true">✦</span> Відео завантажується з відкритого прикладу MP4. Для відтворення потрібне підключення до інтернету; звук не запускається автоматично.</div>
-          </div>
-        </section>
-
-        <section className="section wrap">
-          <div className="section-heading">
-            <h2>Як це працює</h2>
-            <p>Короткі, зрозумілі кроки, які не вимагають особливих навичок чи складної підготовки.</p>
-          </div>
-
-          <div className="steps-grid">
-            {steps.map((step) => (
-              <div className="how-step" key={step.number}>
-                <span>{step.number}</span>
-                <h3>{step.heading}</h3>
-                <p>{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="wrap" id="adults">
-          <div className="adult-callout">
-            <div>
-              <h2>Для дорослих</h2>
-              <p>
-                Тут не про “виправлення” емоцій дитини, а про підтримку, паузу й безпечний вибір.
-                Вправа працює краще, коли вона не викликає страху і не ставить дитину перед
-                обов’язком не подавати правильну реакцію.
-              </p>
-            </div>
-
-            <div className="adult-illustration" aria-hidden="true">
-              <div className="adult-star">✦</div>
-              <div className="adult-circle">
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-                  <path d="M50 12 C31 12 16 29 16 48 C16 67 31 84 50 84 C69 84 84 67 84 48 C84 29 69 12 50 12Z" fill="#f8d45d"/>
-                  <circle cx="40" cy="46" r="4" fill="#3b4d3c"/>
-                  <circle cx="60" cy="46" r="4" fill="#3b4d3c"/>
-                  <path d="M39 58 Q50 67 61 58" stroke="#3b4d3c" strokeWidth="4" strokeLinecap="round" />
-                </svg>
-              </div>
-              <div className="adult-leaf">❀</div>
-            </div>
-          </div>
+            <div className="watch-reminder"><span aria-hidden="true">✦</span> Ці рухомі ілюстрації працюють без зовнішнього відеофайлу, тому не залежать від стороннього відеосервера. Обери інший світ або збільш його; рух можна вимкнути в налаштуваннях пристрою.</div>
         </section>
 
         <section className="resources-section" id="resources">
