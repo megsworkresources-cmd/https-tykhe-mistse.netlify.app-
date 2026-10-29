@@ -397,6 +397,7 @@ function App() {
               </div>
             </div>
             <div className="watch-reminder"><span aria-hidden="true">✦</span> Ці рухомі ілюстрації працюють без зовнішнього відеофайлу, тому не залежать від стороннього відеосервера. Обери інший світ або збільш його; рух можна вимкнути в налаштуваннях пристрою.</div>
+          </div>
         </section>
 
         <section className="resources-section" id="resources">
