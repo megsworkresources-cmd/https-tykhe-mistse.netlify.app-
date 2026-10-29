@@ -14,3 +14,14 @@ test('sunflower growth stages follow elapsed time', () => {
 test('a clock earlier than planting does not make growth negative', () => {
   assert.equal(getGrowthStage(10_000, 5_000), 'seed')
 })
+
+test('invalid planting timestamps never show a fully grown flower', () => {
+  assert.equal(getGrowthStage(Number.NaN, 100_000_000), 'seed')
+  assert.equal(getGrowthStage(Number.POSITIVE_INFINITY, 100_000_000), 'seed')
+  assert.equal(getGrowthStage(0, 100_000_000), 'seed')
+  assert.equal(getGrowthStage(-1, 100_000_000), 'seed')
+})
+
+test('invalid current time falls back to the seed stage', () => {
+  assert.equal(getGrowthStage(1_000, Number.NaN), 'seed')
+})
