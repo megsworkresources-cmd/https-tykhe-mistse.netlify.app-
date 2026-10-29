@@ -130,21 +130,35 @@ function App() {
   const [watchFocus, setWatchFocus] = useState(false)
 
   const scrollToSection = (sectionId) => {
+    // "Ігри" was previously mapped to an element ID that does not exist in
+    // the rendered app. Send it to the actual interactive activities section.
+    const targetAliases = {
+      playroom: 'skills',
+      hero: 'home',
+      help: 'resources'
+    }
+    const targetId = targetAliases[sectionId] || sectionId
     const pageForSection = {
-      home: 'Головна', hero: 'Головна',
+      home: 'Головна',
       'check-in': 'Перевірка',
-      playroom: 'Ігри',
+      skills: 'Активності',
+      activities: 'Активності',
       garden: 'Сад соняшників',
-      activities: 'Активності', skills: 'Активності',
       watch: 'Відеосвіти',
-      resources: 'Допомога', help: 'Допомога',
+      resources: 'Допомога',
       adults: 'Для дорослих',
       about: 'Про проект'
     }
-    const nextPage = pageForSection[sectionId] || 'Головна'
-    setActiveNav(nextPage)
+    const target = document.getElementById(targetId)
+    setActiveNav(pageForSection[targetId] || 'Головна')
     setMenuOpen(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } else {
+      // Keep the action useful if a future link points to a removed section.
+      document.getElementById('home')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
   const handleNavClick = (label) => {
