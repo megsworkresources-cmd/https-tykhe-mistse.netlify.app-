@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { ConvexProvider, ConvexReactClient } from 'convex/react'
 import App from './App'
 import './style.css'
+import './mobile-fixes.css'
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
