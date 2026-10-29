@@ -548,3 +548,9 @@ main.app-page.app-page-about > .section:not(#activities):not(#skills) { display:
   .real-video-wrap .watch-focus-toggle { top: 9px; right: 9px; }
   .real-nature-video { aspect-ratio: 4 / 3; }
 }
+
+.real-video-wrap:after { display: none; }
+.real-video-wrap .watch-player-caption { color: var(--ink); }
+.real-video-wrap .watch-player-caption span { color: #6b805f; }
+.real-video-wrap .watch-player-caption strong { color: var(--ink); }
+.real-video-wrap .watch-player-caption p { color: var(--muted); }
