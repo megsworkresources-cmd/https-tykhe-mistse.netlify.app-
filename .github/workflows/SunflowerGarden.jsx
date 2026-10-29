@@ -10,29 +10,55 @@ const STAGES = {
   bloom: { icon: '🌻', name: 'Квітка', message: 'Твій соняшник розквітнув. Дякуємо, що ти тут.' },
 }
 
+function createDeviceKey() {
+  return window.crypto?.randomUUID?.() || `device-${Math.random().toString(36).slice(2)}-${Date.now().toString(36)}`
+}
+
 function getDeviceKey() {
   const storageKey = 'tykhe-mistse-sunflower-device-v1'
-  let key = window.localStorage.getItem(storageKey)
-  if (!key) {
-    key = window.crypto?.randomUUID?.() || `device-${Math.random().toString(36).slice(2)}-${Date.now().toString(36)}`
-    window.localStorage.setItem(storageKey, key)
+  try {
+    const existing = window.localStorage.getItem(storageKey)
+    if (existing) return existing
+    const key = createDeviceKey()
+    try {
+      window.localStorage.setItem(storageKey, key)
+    } catch {
+      // Keep the garden usable for this visit when browser storage is blocked.
+    }
+    return key
+  } catch {
+    // Some private browsing modes or device policies block localStorage entirely.
+    return createDeviceKey()
   }
-  return key
+}
+
+function readLocalPlantedAt() {
+  try {
+    const stored = window.localStorage.getItem('tykhe-mistse-local-sunflower-v1')
+    if (!stored) return null
+    const timestamp = Number(stored)
+    return Number.isFinite(timestamp) && timestamp > 0 ? timestamp : null
+  } catch {
+    return null
+  }
 }
 
 function LocalGarden() {
   const [now, setNow] = useState(() => Date.now())
+  const [storageWarning, setStorageWarning] = useState(false)
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 30_000)
     return () => window.clearInterval(timer)
   }, [])
-  const [plantedAt, setPlantedAt] = useState(() => {
-    const stored = window.localStorage.getItem('tykhe-mistse-local-sunflower-v1')
-    return stored ? Number(stored) : null
-  })
+  const [plantedAt, setPlantedAt] = useState(readLocalPlantedAt)
   const plant = () => {
     const next = Date.now()
-    window.localStorage.setItem('tykhe-mistse-local-sunflower-v1', String(next))
+    try {
+      window.localStorage.setItem('tykhe-mistse-local-sunflower-v1', String(next))
+      setStorageWarning(false)
+    } catch {
+      setStorageWarning(true)
+    }
     setPlantedAt(next)
   }
   const stage = plantedAt ? getGrowthStage(plantedAt, now) : null
@@ -48,12 +74,13 @@ function LocalGarden() {
           <div className="sunflower-illustration" aria-hidden="true"><span>{stage ? STAGES[stage].icon : '🌻'}</span><i>☀️</i><b>💛</b></div>
           <div className="sunflower-copy">
             <h3>{stage ? STAGES[stage].name : 'Тут може початися твоя квітка'}</h3>
-            <p>{stage ? STAGES[stage].message : 'Один дотик — і ти посадиш соняшник, який залишиться на цьому пристрої.'}</p>
+            <p>{stage ? STAGES[stage].message : 'Один дотик — і ти посадиш соняшник, який може залишитися на цьому пристрої.'}</p>
             {stage && <p className="sunflower-stage-note">Наступний етап прийде з часом. Не потрібно нічого робити швидше.</p>}
             <button type="button" className="sunflower-button" onClick={plant}>{plantedAt ? 'Посадити заново' : 'Посадити соняшник'}</button>
+            {storageWarning && <p className="sunflower-status" role="status">Квітка з’явилася, але браузер не дозволив зберегти її. Якщо оновити сторінку, вона може зникнути.</p>}
           </div>
         </div>
-        <p className="sunflower-privacy">У цьому режимі квітка зберігається лише на цьому пристрої. Спільний сад з’явиться після підключення сервера.</p>
+        <p className="sunflower-privacy">У режимі без сервера квітка зберігається на цьому пристрої, якщо браузер дозволяє збереження. Спільний сад з’явиться після підключення сервера.</p>
       </div>
     </section>
   )
@@ -79,7 +106,7 @@ function ConnectedGarden() {
       await plantFlower({ deviceKey })
       setMessage(myFlower ? 'Твій соняшник починає новий цикл росту.' : 'Твій соняшник посаджено.')
     } catch {
-      setMessage('Не вдалося зберегти квітку. Спробуй ще раз трохи пізніше.')
+      setMessage('Не вдалося зберегти квітку. Перевір з’єднання й спробуй ще раз.')
     } finally {
       setBusy(false)
     }
