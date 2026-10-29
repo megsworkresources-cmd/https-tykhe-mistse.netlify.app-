@@ -68,3 +68,17 @@ img, video, canvas, svg {
 @media (prefers-reduced-motion: reduce) {
   .world-sun, .world-cloud, .world-flower, .world-water { animation: none !important; }
 }
+
+
+/* Override legacy video-caption positioning for the new illustrated scene. */
+.illustrated-world .watch-player-caption {
+  position: relative;
+  inset: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  min-width: 0;
+  pointer-events: none;
+}
+.illustrated-world .watch-focus-toggle { position: absolute; top: 12px; right: 12px; }
