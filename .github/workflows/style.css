@@ -518,3 +518,39 @@ h1,h2,h3{line-height:1.22}
 .community-garden-empty>span{font-size:34px}.community-garden-empty p{margin:0;max-width:470px;line-height:1.65;font-size:14px}
 @media(max-width:700px){.sunflower-section{padding:54px 0}.sunflower-heading{margin-bottom:24px}.sunflower-heading p{font-size:15px}.sunflower-card{grid-template-columns:1fr;gap:18px;border-radius:21px;padding:19px}.sunflower-illustration{min-height:150px}.sunflower-illustration>span{font-size:74px}.sunflower-copy{text-align:center}.community-garden-heading{align-items:flex-start;margin-top:28px}.community-garden-grid{grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:7px;padding:12px}.community-flower{border-radius:13px}}
 @media(prefers-reduced-motion:reduce){.sunflower-button{transition:none}}
+
+
+/* Content is presented as separate pages rather than one continuous scroll. */
+main.app-page > * { display: none; }
+main.app-page.app-page-home > #hero,
+main.app-page.app-page-home > #activities { display: block; }
+main.app-page.app-page-playroom > #playroom { display: block; }
+main.app-page.app-page-garden > #garden { display: block; }
+main.app-page.app-page-activities > #activities,
+main.app-page.app-page-activities > #skills { display: block; }
+main.app-page.app-page-watch > #watch { display: block; }
+main.app-page.app-page-check-in > #check-in { display: block; }
+main.app-page.app-page-resources > #resources,
+main.app-page.app-page-resources > #help { display: block; }
+main.app-page.app-page-adults > #adults { display: block; }
+main.app-page.app-page-about > #about,
+main.app-page.app-page-about > .quote-band,
+main.app-page.app-page-about > .final-cta { display: block; }
+main.app-page.app-page-about > .section:not(#activities):not(#skills) { display: block; }
+.real-video-wrap { background: #dfe9d8; min-height: 0; padding: 0; display: grid; grid-template-columns: 1fr; }
+.real-nature-video { display: block; width: 100%; aspect-ratio: 16 / 9; max-height: 68vh; object-fit: contain; background: #203326; }
+.real-video-wrap .watch-player-caption { position: relative; inset: auto; background: #fffdf8; padding: 20px 24px; }
+.real-video-wrap .watch-focus-toggle { position: absolute; top: 14px; right: 14px; z-index: 4; }
+.focus-mode .real-nature-video { max-height: 76vh; }
+@keyframes cloud-breathe { 0% { transform: translateX(-16px) scale(.88); } 50% { transform: translateX(14px) scale(1.05); } 100% { transform: translateX(-16px) scale(.92); } }
+@media (max-width: 800px) {
+  .real-video-wrap .watch-player-caption { padding: 17px; }
+  .real-video-wrap .watch-focus-toggle { top: 9px; right: 9px; }
+  .real-nature-video { aspect-ratio: 4 / 3; }
+}
+
+.real-video-wrap:after { display: none; }
+.real-video-wrap .watch-player-caption { color: var(--ink); }
+.real-video-wrap .watch-player-caption span { color: #6b805f; }
+.real-video-wrap .watch-player-caption strong { color: var(--ink); }
+.real-video-wrap .watch-player-caption p { color: var(--muted); }

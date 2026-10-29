@@ -130,13 +130,21 @@ function App() {
   const [watchFocus, setWatchFocus] = useState(false)
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const headerOffset = window.matchMedia('(max-width: 800px)').matches ? 82 : 98
-      const top = element.getBoundingClientRect().top + window.scrollY - headerOffset
-      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+    const pageForSection = {
+      home: 'Головна', hero: 'Головна',
+      'check-in': 'Перевірка',
+      playroom: 'Ігри',
+      garden: 'Сад соняшників',
+      activities: 'Активності', skills: 'Активності',
+      watch: 'Відеосвіти',
+      resources: 'Допомога', help: 'Допомога',
+      adults: 'Для дорослих',
+      about: 'Про проект'
     }
+    const nextPage = pageForSection[sectionId] || 'Головна'
+    setActiveNav(nextPage)
     setMenuOpen(false)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleNavClick = (label) => {
@@ -223,7 +231,7 @@ function App() {
         </div>
       </header>
 
-      <main>
+      <main className={`app-page app-page-${sectionMap[activeNav] || "home"}`} aria-label={activeNav}>
         <section className="hero wrap" id="hero">
           <div className="hero-copy">
             <h1>
@@ -345,18 +353,27 @@ function App() {
               <p>Обери малюнок і трохи відпочинь. Натисни на іншу картку, щоб побачити інший світ.</p>
             </div>
             <div className={watchFocus ? 'watch-experience focus-mode' : 'watch-experience'}>
-              <div className={`watch-player-wrap illustrated-world world-${watchClips[activeWatch].scene}`} role="img" aria-label={watchClips[activeWatch].title}>
-                <div className="world-art" aria-hidden="true"><span className="world-sun">☼</span><span className="world-cloud">☁</span><span className="world-moon">☾</span><span className="world-water">〰 〰 〰 〰 〰</span><span className="world-flower">✿</span><span className="world-stars">✦ · ✧ · ✦</span><span className="world-hill world-hill-one"/><span className="world-hill world-hill-two"/></div>
-                <div className="watch-player-caption"><span>{watchClips[activeWatch].symbol} {watchClips[activeWatch].category}</span><strong>{watchClips[activeWatch].title}</strong><p>{watchClips[activeWatch].description}</p></div>
-                <button type="button" className="watch-focus-toggle" aria-pressed={watchFocus} onClick={() => setWatchFocus(v => !v)}>{watchFocus ? 'Повернути меню' : 'Зануритися у перегляд'} <span aria-hidden="true">{watchFocus ? '↙' : '↗'}</span></button>
+              <div className="watch-player-wrap real-video-wrap">
+                <video
+                  className="real-nature-video"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/artwork/house-you-carry.svg"
+                  aria-label="Коротке відео квітки в природі"
+                >
+                  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+                  На жаль, цей браузер не підтримує відтворення відео. Спробуй відкрити сторінку в іншому браузері.
+                </video>
+                <div className="watch-player-caption">
+                  <span>🌼 ПРИРОДА · КОРОТКА ПАУЗА</span>
+                  <strong>Подивись, як розкривається квітка</strong>
+                  <p>Можна натиснути відтворення, зупинити відео або просто подивитися на екран. Дихай як зазвичай.</p>
+                </div>
+                <button type="button" className="watch-focus-toggle" aria-pressed={watchFocus} onClick={() => setWatchFocus(v => !v)}>{watchFocus ? 'Повернути меню' : 'Збільшити відео'} <span aria-hidden="true">{watchFocus ? '↙' : '↗'}</span></button>
               </div>
-              {!watchFocus && <div className="watch-choices" aria-label="Обрати відеосвіт">
-                {watchClips.map((clip, index) => <button type="button" key={clip.title} className={activeWatch === index ? 'watch-choice watch-choice-active' : 'watch-choice'} aria-pressed={activeWatch === index} onClick={() => setActiveWatch(index)}>
-                  <span className="watch-choice-art" aria-hidden="true">{clip.symbol}<i /></span><span className="watch-choice-copy"><small>{clip.category}</small><strong>{clip.title}</strong><span>{clip.description}</span></span><span className="watch-choice-arrow" aria-hidden="true">{activeWatch === index ? '●' : '↗'}</span>
-                </button>)}
-              </div>}
             </div>
-            <div className="watch-reminder"><span aria-hidden="true">✦</span> Можна дивитися, змінити відео, зробити паузу або закрити розділ у будь-який момент.</div>
+            <div className="watch-reminder"><span aria-hidden="true">✦</span> Відео завантажується з відкритого прикладу MP4. Для відтворення потрібне підключення до інтернету; звук не запускається автоматично.</div>
           </div>
         </section>
 
