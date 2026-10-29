@@ -38,3 +38,33 @@ img, video, canvas, svg {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Interactive illustrated-world selector: responsive, touch-friendly, no remote media dependency. */
+.watch-experience { display: grid; gap: 16px; }
+.illustrated-world { min-height: 360px; }
+.illustrated-world .world-art { pointer-events: none; }
+.illustrated-world .body-visual { z-index: 1; font-size: clamp(56px, 9vw, 96px); }
+.illustrated-world .watch-player-caption { z-index: 2; }
+.watch-world-options { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.watch-world-option {
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  gap: 5px; min-width: 0; min-height: 92px; padding: 12px;
+  border: 2px solid #e5e6d9; border-radius: 15px; background: #fffdf8;
+  color: #304635; text-align: left; touch-action: manipulation;
+}
+.watch-world-option > span { font-size: 25px; }
+.watch-world-option strong { font-size: 13px; line-height: 1.3; }
+.watch-world-option small { color: #71806f; font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+.watch-world-option.selected { border-color: #527a56; background: #edf4e7; box-shadow: inset 0 0 0 1px #527a56; }
+.watch-world-option:focus-visible { outline: 3px solid #b88943; outline-offset: 3px; }
+.watch-experience.focus-mode .illustrated-world { min-height: min(68vh, 650px); }
+@media (max-width: 700px) {
+  .illustrated-world { min-height: 280px; }
+  .watch-world-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .watch-world-option { min-height: 82px; padding: 10px; }
+  .watch-experience.focus-mode .illustrated-world { min-height: 55vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .world-sun, .world-cloud, .world-flower, .world-water { animation: none !important; }
+}
